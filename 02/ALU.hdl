@@ -45,12 +45,12 @@ CHIP ALU {
         ng; // 1 if (out<0),  0 otherwise
 
     PARTS:
-    // zero and negate x if necessary
+    // zero or negate x if necessary
     Mux16(a=x, b=false, sel=zx, out=zxOut);
     Not16(in=zxOut, out=notx);
     Mux16(a=zxOut, b=notx, sel=nx, out=nxOut);
 
-    // zero and negate y if necessary
+    // zero or negate y if necessary
     Mux16(a=y, b=false, sel=zy, out=zyOut);
     Not16(in=zyOut, out=noty);
     Mux16(a=zyOut, b=noty, sel=ny, out=nyOut);
