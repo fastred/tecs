@@ -80,13 +80,15 @@ CHIP CPU {
       d[0]=pos, d[1]=zr, d[2]=ng,
       e[0]=pos, e[1]=zr, e[2]=ng,
       f[0]=notZr, f[1]=zr, f[2]=notZr,
-      g[0]=true, g[1]=true, g[2]=true,
+      g[0]=pos, g[1]=zr, g[2]=ng,
+      h[0]=instruction[0], h[1]=instruction[1], h[2]=instruction[2],
       sel=instruction[0..2], out[0]=jumpCond0, out[1]=jumpCond1,
       out[2]=jumpCond2);
 
     Xor(a=instruction[0], b=jumpCond0, out=jump0Not);
     Xor(a=instruction[1], b=jumpCond1, out=jump1Not);
     Xor(a=instruction[2], b=jumpCond2, out=jump2Not);
+
     // check if conditions match (Xors equal to 0) and jump only in C instruction
     Or8Way(in[0]=jump0Not, in[1]=jump1Not, in[2]=jump2Not,
       in[3]=Ainst, out=isNotJump);
